@@ -1,0 +1,48 @@
+{% extends 'webshop/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div id="sidebar" class="glass-effect">
+        <h3>Categories</h3>
+        <ul>
+            <li {% if category %}class="selected"{% endif %}>
+                <a href="{% url 'webshop:product_list' %}">All</a>
+            </li>
+            {% for cat in categories %}
+                <li {% if category.slug == cat.slug %}class="selected"{% endif %}>
+                    <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="main" class="product_list">
+        <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+        {% for product in products %}
+            <div class="item glass-effect">
+                <a href="{{ product.get_absolute_url }}">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" class="product-image">
+                </a>
+                <a href="{{ product.get_absolute_url }}" class="product-name">{{ product.name }}</a>
+                <p class="product-price">${{ product.price }}</p>
+            </div>
+        {% endfor %}
+        <div class="pagination glass-effect">
+            <span class="step-links">
+                {% if products.has_previous %}
+                    <a href="?page={{ products.previous_page_number }}" class="pagination-btn">Prev</a>
+                {% endif %}
+                <span class="current">
+                    Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                </span>
+                {% if products.has_next %}
+                    <a href="?page={{ products.next_page_number }}" class="pagination-btn">Next</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+{% endblock %}
+

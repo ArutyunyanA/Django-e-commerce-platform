@@ -1,0 +1,25 @@
+{% extends 'webshop/base.html' %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-box">
+        <h1>Log-in</h1>
+        <p>Please, use the login form to log in to create the order</p>
+
+        {% if next and 'orders/' in next %}
+            <div class="alert alert-info">
+                <strong>Note:</strong> Only registered and authenticated users can place orders. Please log in or create an account to proceed with your purchase.
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Log in" class="login-btn"></p>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

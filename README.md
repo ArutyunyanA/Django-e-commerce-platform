@@ -1,83 +1,81 @@
 # eCommerce Platform with Asynchronous Features in Django
 
-This project is an advanced eCommerce platform built with Django. It features asynchronous processing with Celery and RabbitMQ, real-time product recommendations powered by Redis, a coupon discount system, Stripe payment integration, and a user dashboard to manage orders and download invoices. Designed for efficient online retail, this project offers a robust and scalable solution for eCommerce.
+This project is an advanced eCommerce platform built with Django. It features asynchronous processing with Celery and RabbitMQ, real-time product recommendations powered by Redis, a coupon discount system, Stripe payment integration, and a user dashboard to manage orders and download invoices.
 
 ## Features
 
-- **Asynchronous Task Processing**: Utilizes Celery and RabbitMQ to handle background tasks, ensuring smooth user experience and efficient task management.
-- **Product Recommendations**: Integrated with Redis to deliver real-time product recommendations based on user interactions and purchase history.
-- **Coupon System**: Allows for customizable discount codes to enhance customer engagement and increase conversions.
-- **User Authentication**: Secure user registration and login with dedicated personal dashboards for tracking orders and downloading PDF invoices.
-- **Stripe Payment Gateway**: Seamless integration with Stripe to manage online payments securely and efficiently.
-- **Order Management**: Allows users to view order history, track current orders, and download invoices for completed purchases.
-- **PDF Invoices**: Automatically generates downloadable PDF invoices for users once an order is marked as paid.
+- **Asynchronous Task Processing**: Utilizes Celery and RabbitMQ for background task management.
+- **Product Recommendations**: Real-time product recommendations powered by Redis.
+- **Coupon System**: Discount code integration for order management.
+- **User Authentication**: User registration and login system with a personal dashboard.
+- **Stripe Payment Integration**: Secure Stripe payments for order processing.
+- **Order Management**: Track orders and download invoices for completed purchases.
+- **PDF Invoices**: Automatically generated PDF invoices for paid orders.
 
-## Technology Stack
-
-- **Backend**: Django, Django REST Framework
-- **Asynchronous Processing**: Celery, RabbitMQ
-- **Database**: PostgreSQL
-- **Caching and Recommendations**: Redis
-- **Payment Integration**: Stripe API
-- **Frontend**: HTML, CSS, JavaScript (enhanced with modern design elements such as glassmorphism for a visually appealing interface)
-
-## Setup and Installation
-
-To set up this project on your local environment, follow these steps:
+## Installation
 
 1. **Clone the repository**:
-
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+    ```bash
+    git clone https://github.com/your-username/your-repo-name.git
+    cd your-repo-name
+    ```
 
 2. **Create a virtual environment**:
-
-python3 -m venv venv
-source venv/bin/activate
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
 
 3. **Install dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-pip install -r requirements.txt
-
-4. **Set up environment variables**:
-Create a `.env` file in the root directory and configure the following variables:
-
-SECRET_KEY=your_secret_key
-STRIPE_SECRET_KEY=your_stripe_secret_key
-STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+4. **Create `.env` file**:
+    Create a `.env` file in the root directory with the following environment variables:
+    ```bash
+    SECRET_KEY=your_secret_key
+    STRIPE_SECRET_KEY=your_stripe_secret_key
+    STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+    ```
 
 5. **Configure RabbitMQ and Redis**:
-Ensure RabbitMQ and Redis are running on your system. You can install them via Homebrew on macOS:
-
-brew install rabbitmq redis
-brew services start rabbitmq
-brew services start redis
+    Ensure RabbitMQ and Redis are running on your system. You can install them via Homebrew on macOS:
+    ```bash
+    brew install rabbitmq redis
+    brew services start rabbitmq
+    brew services start redis
+    ```
 
 6. **Apply migrations**:
-
-python manage.py migrate
+    ```bash
+    python manage.py migrate
+    ```
 
 7. **Create a superuser**:
-
-python manage.py createsuperuser
+    ```bash
+    python manage.py createsuperuser
+    ```
 
 8. **Run the development server**:
-
-python manage.py runserver
+    ```bash
+    python manage.py runserver
+    ```
 
 9. **Start Celery Worker**:
-
-celery -A your_project_name worker –loglevel=info
+    ```bash
+    celery -A your_project_name worker --loglevel=info
+    ```
 
 10. **Start Celery Beat Scheduler** (for scheduled tasks):
- ```
- celery -A your_project_name beat --loglevel=info
- ```
+    ```bash
+    celery -A your_project_name beat --loglevel=info
+    ```
 
 11. **Generate `requirements.txt`** (if not already created):
- ```
- pip freeze > requirements.txt
- ```
+    ```bash
+    pip freeze > requirements.txt
+    ```
 
 ## Usage
 
@@ -86,15 +84,34 @@ celery -A your_project_name worker –loglevel=info
 - **Coupon Management**: Users can apply discount codes at checkout.
 - **Real-Time Product Recommendations**: Recommendations are updated based on user behavior, providing a personalized shopping experience.
 
-## Screenshots
+## Project Structure
 
-Include screenshots of your main pages here to demonstrate the UI and key features.
+- `accounts/` - Contains the authentication app with forms for login, logout, password change/reset, and user registration.
+- `orders/` - Order-related models and views for order processing and invoice generation.
+- `products/` - Models and views for handling products, categories, and recommendations.
+- `static/` - Static files (CSS, JS) for styling the pages.
+- `templates/` - HTML templates for rendering views.
+- `settings.py` - Configuration for the project, including Stripe integration, Celery, and Redis settings.
+
+## Security
+
+- **HTTPS Support**: Ensure secure connections with HTTPS (use SSL certificates in production).
+- **Password management**: Includes secure user registration, login, and password reset functionality.
+- **CSRF Protection**: All forms include CSRF protection to prevent cross-site request forgery.
+
+## Requirements
+
+- Python 3.10+
+- Django 4.x
+- Celery
+- RabbitMQ
+- Redis
+- Stripe API
 
 ## Contributing
 
-If you’d like to contribute to this project, please fork the repository and create a pull request.
+If you’d like to contribute to this project, feel free to fork the repository and submit a pull request.
 
 ## License
 
 This project is licensed under the MIT License.
-

@@ -16,8 +16,8 @@ This project is an advanced eCommerce platform built with Django. It features as
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/your-repo-name.git
-    cd your-repo-name
+    git clone https://github.com/ArutyunyanA/Django-e-commerce-platform.git
+    cd Django-e-commerce-platform
     ```
 
 2. **Create a virtual environment**:
